@@ -12,7 +12,7 @@
     "build": "rimraf ./dist && tsc -p tsconfig.lib.json",
     "lint": "eslint .",
     "format": "prettier --write 'src/**/*.ts'",
-    "release": "pnpm build && pnpm publish --access public"
+    "release": "shipjs prepare"
   },
   "keywords": [
     "kiwoom",
