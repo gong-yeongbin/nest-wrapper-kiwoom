@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "./dist",
+    "emitDeclarationOnly": false,            // JS와 타입 파일 둘 다 내보냄
+    "sourceMap": true,                       // 소스맵(디버깅용) 생성
+    "removeComments": true                   // JS에서 주석 제거
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+}
