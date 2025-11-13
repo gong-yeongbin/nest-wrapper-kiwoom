@@ -1,0 +1,150 @@
+***
+
+## Ship.js 실행 플로우 (단계별)
+
+### **1단계: 개발 브랜치에서 준비**
+- feature/dev 브랜치에서 코드 개발 완료
+- 모든 변경사항을 커밋 및 main/master에 merge
+- **작업트리 clean 상태 확인** (`git status`)
+
+***
+
+### **2단계: Release 준비 명령 실행**
+**중요:** main/master가 아닌 **별도 브랜치(또는 develop)에서 실행**
+
+```bash
+pnpm run release
+# 또는
+npx shipjs release
+```
+
+***
+
+### **3단계: Ship.js가 자동 처리**
+Ship.js가 다음을 자동으로 실행:
+
+1. **버전 업 선택**
+   - 현재: 1.0.14 → 새 버전: 1.0.15 (patch), 1.1.0 (minor), 2.0.0 (major) 중 선택
+
+2. **CHANGELOG.md 생성/갱신**
+   - 새 버전 정보, 변경사항 자동 기록
+
+3. **릴리즈 커밋 및 태그 생성**
+   - 커밋 메시지: **`chore: release v1.0.15`** (Ship.js 규약)
+   - 태그: `v1.0.15`
+
+4. **Release PR 생성 (GitHub로)**
+   - 대상: main/master 브랜치
+   - PR 내용: 버전, changelog, 릴리즈 정보
+
+***
+
+### **4단계: GitHub에서 PR 검토**
+- 깃허브 웹사이트에서 자동 생성된 Release PR 확인
+- PR 리뷰/수정 가능
+- 문제없으면 **"Squash and merge"** 또는 **"Merge"** 클릭
+
+***
+
+### **5단계: 병합(Merge) 후 배포**
+
+#### **5-1. 자동 배포 (manualPublish: false)**
+```js
+// .shiprc.js에서
+manualPublish: false  // default
+```
+- PR이 main/master에 병합되면 **자동으로 `npm publish` 실행**
+- npm registry에 새 버전 배포 완료
+
+#### **5-2. 수동 배포 (manualPublish: true)**
+```js
+// .shiprc.js에서
+manualPublish: true
+```
+- PR 병합 후 로컬에서 직접 배포 명령 실행:
+  ```bash
+  pnpx shipjs trigger
+  ```
+  - 이 명령으로 npm publish 트리거
+  - 2FA 인증 등 필요시 직접 처리
+
+***
+
+## 플로우 다이어그램
+
+```
+┌─────────────────────────────────────────────┐
+│ 1. 코드 개발 완료                             │
+│    (feature → main/master merge)            │
+└────────────┬────────────────────────────────┘
+             │
+             ▼
+┌─────────────────────────────────────────────┐
+│ 2. git status 확인 (clean 상태 필수)         │
+└────────────┬────────────────────────────────┘
+             │
+             ▼
+┌─────────────────────────────────────────────┐
+│ 3. Release 브랜치에서 pnpm run release     │
+│    (main 아님! ❌)                          │
+└────────────┬────────────────────────────────┘
+             │
+             ▼
+┌─────────────────────────────────────────────┐
+│ 4. Ship.js 자동 처리:                       │
+│    - 버전 선택                              │
+│    - CHANGELOG 생성                         │
+│    - 커밋 & 태그: chore: release v1.0.15  │
+│    - Release PR 생성 (main 대상)           │
+└────────────┬────────────────────────────────┘
+             │
+             ▼
+┌─────────────────────────────────────────────┐
+│ 5. GitHub PR 검토 후 Merge                  │
+│    (main/master 병합)                       │
+└────────────┬────────────────────────────────┘
+             │
+             ▼
+      ┌──────┴──────┐
+      │             │
+ (자동)▼         (수동)▼
+  npm publish   pnpx shipjs
+   publish        trigger
+      │             │
+      └──────┬──────┘
+             │
+             ▼
+┌─────────────────────────────────────────────┐
+│ 6. npm registry 배포 완료 ✅                 │
+│    (새 버전 1.0.15 배포)                    │
+└─────────────────────────────────────────────┘
+```
+
+***
+
+## 주요 포인트 정리
+
+| 단계 | 명령어/위치 | 설명 |
+|------|----------|------|
+| 1 | feature 브랜치 | 코드 개발 |
+| 2 | main/master | merge 완료, clean 확인 |
+| **3** | **release/dev 브랜치** | **`pnpm run release` 실행** (main X) |
+| 4 | GitHub | Release PR 생성 (자동) |
+| 5 | GitHub | PR Merge |
+| **6-A** | **(자동)** | **npm publish 자동 실행** |
+| **6-B** | **(수동)** | **`pnpx shipjs trigger`** 로컬 실행 |
+
+***
+
+## 흔한 실수 ❌
+
+1. **main/master 브랜치에서 `pnpm run release` 실행**
+   → 아무 동작 없음 (이미 릴리즈 브랜치라고 인식)
+
+2. **작업트리가 clean하지 않은 상태에서 release 실행**
+   → "working tree is not clean" 에러
+
+3. **GITHUB_TOKEN 권한 부족 또는 npm 인증 불완전**
+   → PR 생성 또는 publish 실패
+
+***
