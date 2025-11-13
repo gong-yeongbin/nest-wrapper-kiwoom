@@ -3,19 +3,7 @@ import { KIWOOM_MODULE_OPTIONS } from '../kiwoom.constants';
 import { KiwoomOptions } from '../interfaces';
 import { HttpService } from '@nestjs/axios';
 import * as dayjs from 'dayjs';
-
-interface AU10001Response {
-	expires_dt: string;
-	return_msg: string;
-	token_type: string;
-	return_code: number;
-	token: string;
-}
-
-interface AU10002Response {
-	return_msg: string;
-	return_code: number;
-}
+import { AU10001Response, AU10002Response } from '../types';
 
 @Injectable()
 export class Oauth2 {
