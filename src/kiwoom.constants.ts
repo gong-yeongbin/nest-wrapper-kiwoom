@@ -1,0 +1,1 @@
+export const KIWOOM_MODULE_OPTIONS = Symbol('KIWOOM_MODULE_OPTIONS');

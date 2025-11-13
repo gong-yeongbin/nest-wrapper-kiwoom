@@ -1,2 +1,2 @@
 export * from './kiwoom.module';
-export * from './kiwoom.service';
+export * from './services/oauth2.service';
