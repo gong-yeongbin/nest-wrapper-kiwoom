@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException, OnModuleInit } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { KIWOOM_MODULE_OPTIONS } from '../kiwoom.constants';
 import { KiwoomOptions } from '../interfaces';
 import { HttpService } from '@nestjs/axios';
