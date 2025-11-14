@@ -35,6 +35,7 @@ export class Oauth2 {
 			return bearerToken;
 		}
 	}
+
 	async au10001(): Promise<AU10001Response> {
 		try {
 			this.body.grant_type = 'client_credentials';
