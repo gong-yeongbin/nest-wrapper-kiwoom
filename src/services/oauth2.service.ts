@@ -1,9 +1,9 @@
 import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { KIWOOM_MODULE_OPTIONS } from '../kiwoom.constants';
-import { KiwoomOptions } from '../interfaces';
 import { HttpService } from '@nestjs/axios';
+import { KIWOOM_MODULE_OPTIONS } from '@src/kiwoom.constants';
+import { KiwoomOptions } from '@src/interfaces';
+import { AU10001Response, AU10002Response } from '@src/types';
 import * as dayjs from 'dayjs';
-import { AU10001Response, AU10002Response } from '../types';
 
 @Injectable()
 export class Oauth2 {

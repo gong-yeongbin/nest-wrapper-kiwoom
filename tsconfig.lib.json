@@ -6,7 +6,13 @@
     "sourceMap": true,                       // 소스맵(디버깅용) 생성
     "removeComments": true,                   // JS에서 주석 제거
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@types/*": ["./src/types/*"],
+      "@services/*": ["./src/services/*"],
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]

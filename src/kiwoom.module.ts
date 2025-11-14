@@ -2,8 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { KiwoomAsyncOptions, KiwoomOptions } from './interfaces';
 import { KIWOOM_MODULE_OPTIONS } from './kiwoom.constants';
 import { HttpModule } from '@nestjs/axios';
-import { Oauth2 } from './services';
-import { ETFService } from './services/etf.service';
+import { ETFService, Oauth2 } from '@src/services';
 
 @Module({
 	imports: [HttpModule],
