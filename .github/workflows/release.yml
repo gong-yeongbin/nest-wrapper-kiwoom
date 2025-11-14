@@ -12,6 +12,13 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+      # Add following line if you are publishing to npm
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      NPM_CONFIG_PROVENANCE: true
+      # Add more env variables if needed
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,11 +44,14 @@ jobs:
       - run: pnpm install
       - run: pnpm build
 
-      - name: Release
-        run: npx release-it --verbose
-        env:
-          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
-          # Add following line if you are publishing to npm
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_CONFIG_PROVENANCE: true
-          # Add more env variables if needed
+      - name: Release Major
+        if: contains(join(github.event.pull_request.labels.*.name, ','), 'major')
+        run: npx release-it major --ci
+
+      - name: Release Minor
+        if: contains(join(github.event.pull_request.labels.*.name, ','), 'minor')
+        run: npx release-it minor --ci
+
+      - name: Release Patch
+        if: contains(join(github.event.pull_request.labels.*.name, ','), 'patch')
+        run: npx release-it patch --ci
