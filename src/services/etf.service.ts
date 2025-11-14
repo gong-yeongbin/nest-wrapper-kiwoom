@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { Oauth2 } from './oauth2.service';
-import { KA40004Params, ka40004ParamsDefault, KA40004Response } from '../types';
+import { KA40004Params, ka40004ParamsDefault, KA40004Response } from '@src/types';
+import { Oauth2 } from '@services/oauth2.service';
 
 @Injectable()
 export class ETFService {
