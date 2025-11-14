@@ -1,9 +1,10 @@
 name: Release
 
 on:
-  push:
+  pull_request:
+    types: [ closed ]
     branches:
-      - main # This specifies the 'main' branch
+      - main
 
 permissions:
   contents: write
