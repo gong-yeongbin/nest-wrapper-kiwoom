@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { KA40001Params, KA40001Response, KA40004Params, ka40004ParamsDefault, KA40004Response } from '@src/types';
+import { KA40001Params, KA40001Response, KA40002Params, KA40002Response, KA40004Params, ka40004ParamsDefault, KA40004Response } from '@src/types';
 import { Oauth2 } from '@services/oauth2.service';
 
 @Injectable()
@@ -22,6 +22,19 @@ export class ETFService {
 			const params: KA40001Params = { ...ka40001Params };
 			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/etf', params, { headers: this.headers });
 			return response.data as KA40001Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka40002(ka40002Params: KA40002Params) {
+		try {
+			this.headers['api-id'] = 'ka40001';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA40002Params = { ...ka40002Params };
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/etf', params, { headers: this.headers });
+			return response.data as KA40002Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
