@@ -12,6 +12,8 @@ import {
 	KA40004Response,
 	KA40006Param,
 	KA40006Response,
+	KA40007Param,
+	KA40007Response,
 } from '@src/types';
 import { Oauth2 } from '@services/oauth2.service';
 
@@ -90,6 +92,20 @@ export class ETFService {
 
 			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
 			return response.data as KA40006Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka40007(ka40007Param: KA40007Param): Promise<KA40007Response> {
+		try {
+			this.headers['api-id'] = 'ka40007';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA40007Param = { ...ka40007Param };
+
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KA40007Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
