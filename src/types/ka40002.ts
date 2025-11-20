@@ -1,4 +1,4 @@
-export interface KA40002Params {
+export interface KA40002Param {
 	stk_cd: string; // 종목코드
 }
 

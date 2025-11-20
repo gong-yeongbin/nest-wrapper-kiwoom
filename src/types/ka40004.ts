@@ -1,4 +1,4 @@
-export interface KA40004Params {
+export interface KA40004Param {
 	txon_type: string;
 	navpre: string;
 	mngmcomp: string;
@@ -7,7 +7,7 @@ export interface KA40004Params {
 	stex_tp: string;
 }
 
-export const ka40004ParamsDefault: KA40004Params = {
+export const ka40004ParamsDefault: KA40004Param = {
 	txon_type: '0',
 	navpre: '0',
 	mngmcomp: '0000',

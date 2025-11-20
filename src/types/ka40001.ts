@@ -1,4 +1,4 @@
-export interface KA40001Params {
+export interface KA40001Param {
 	stk_cd: string; // 종목코드
 	etfobjt_idex_cd: string; // ETF대상지수코드
 	dt: string; // 기간

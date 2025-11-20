@@ -1,4 +1,4 @@
-export interface KT10000Params {
+export interface KT10000Param {
 	dmst_stex_tp: string; // 국내거래소구분	: KRX,NXT,SOR
 	stk_cd: string; // 종목코드
 	ord_qty: string; // 주문수량
