@@ -1,6 +1,6 @@
 {
   "name": "nest-wrapper-kiwoom",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://github.com/gong-yeongbin/nest-wrapper-kiwoom",
   "description": "A Nest module wrapper for 키움 REST API",
   "main": "dist/index.js",
