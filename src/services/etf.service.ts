@@ -14,6 +14,12 @@ import {
 	KA40006Response,
 	KA40007Param,
 	KA40007Response,
+	KA40008Param,
+	KA40008Response,
+	KA40009Param,
+	KA40009Response,
+	KA40010Param,
+	KA40010Response,
 } from '@src/types';
 import { Oauth2 } from '@services/oauth2.service';
 
@@ -106,6 +112,48 @@ export class ETFService {
 
 			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
 			return response.data as KA40007Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka40008(ka40008Param: KA40008Param): Promise<KA40008Response> {
+		try {
+			this.headers['api-id'] = 'ka40008';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA40008Param = { ...ka40008Param };
+
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KA40008Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka40009(ka40009Param: KA40009Param): Promise<KA40009Response> {
+		try {
+			this.headers['api-id'] = 'ka40009';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA40009Param = { ...ka40009Param };
+
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KA40009Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka40010(ka40010Param: KA40010Param): Promise<KA40010Response> {
+		try {
+			this.headers['api-id'] = 'ka40010';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA40010Param = { ...ka40010Param };
+
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KA40010Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
