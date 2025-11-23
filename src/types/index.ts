@@ -8,3 +8,4 @@ export * from './ka40006';
 export * from './ka40007';
 export * from './ka40008';
 export * from './ka40009';
+export * from './ka40010';
