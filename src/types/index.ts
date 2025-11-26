@@ -11,3 +11,4 @@ export * from './ka40009';
 export * from './ka40010';
 export * from './ka01690';
 export * from './ka10072';
+export * from './ka10073';
