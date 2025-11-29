@@ -1,7 +1,18 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { Oauth2 } from '@services/oauth2.service';
-import { KA01690Param, KA01690Response, KA10072Param, KA10072Response, KA10073Param, KA10073Response, KA10074Param, KA10074Response } from '@src/types';
+import {
+	KA01690Param,
+	KA01690Response,
+	KA10072Param,
+	KA10072Response,
+	KA10073Param,
+	KA10073Response,
+	KA10074Param,
+	KA10074Response,
+	KA10075Param,
+	KA10075Response,
+} from '@src/types';
 
 @Injectable()
 export class AccountService {
@@ -63,6 +74,19 @@ export class AccountService {
 			const params: KA10074Param = { ...ka10074Param };
 			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
 			return response.data as KA10074Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka10075(ka10075Param: KA10075Param) {
+		try {
+			this.headers['api-id'] = 'ka10075';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA10075Param = { ...ka10075Param };
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KA10075Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
