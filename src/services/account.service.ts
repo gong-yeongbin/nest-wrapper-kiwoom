@@ -20,6 +20,8 @@ import {
 	KA10085Response,
 	KA10088Param,
 	KA10088Response,
+	KA10170Param,
+	KA10170Response,
 } from '@src/types';
 
 @Injectable()
@@ -147,6 +149,19 @@ export class AccountService {
 			const params: KA10088Param = { ...ka10088Param };
 			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
 			return response.data as KA10088Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async ka10170(ka10170Param: KA10170Param) {
+		try {
+			this.headers['api-id'] = 'ka10170';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KA10170Param = { ...ka10170Param };
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KA10170Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
