@@ -16,3 +16,4 @@ export * from './kt00005';
 export * from './kt00007';
 export * from './kt00008';
 export * from './kt00009';
+export * from './kt00010';
