@@ -1,0 +1,56 @@
+export interface KT00013Param {}
+
+export interface KT00013Response {
+	tdy_reu_objt_amt: string;
+	tdy_reu_use_amt: string;
+	tdy_reu_alowa: string;
+	tdy_reu_lmtt_amt: string;
+	tdy_reu_alowa_fin: string;
+	pred_reu_objt_amt: string;
+	pred_reu_use_amt: string;
+	pred_reu_alowa: string;
+	pred_reu_lmtt_amt: string;
+	pred_reu_alowa_fin: string;
+	ch_amt: string;
+	ch_profa: string;
+	use_pos_ch: string;
+	ch_use_lmtt_amt: string;
+	use_pos_ch_fin: string;
+	repl_amt_amt: string;
+	repl_profa: string;
+	use_pos_repl: string;
+	repl_use_lmtt_amt: string;
+	use_pos_repl_fin: string;
+	crd_grnta_ch: string;
+	crd_grnta_repl: string;
+	crd_grnt_ch: string;
+	crd_grnt_repl: string;
+	uncla: string;
+	ls_grnt_reu_gold: string;
+	'20ord_alow_amt': string;
+	'30ord_alow_amt': string;
+	'40ord_alow_amt': string;
+	'50ord_alow_amt': string;
+	'60ord_alow_amt': string;
+	'100ord_alow_amt': string;
+	tdy_crd_rpya_loss_amt: string;
+	pred_crd_rpya_loss_amt: string;
+	tdy_ls_rpya_loss_repl_profa: string;
+	pred_ls_rpya_loss_repl_profa: string;
+	evlt_repl_amt_spg_use_skip: string;
+	evlt_repl_rt: string;
+	crd_repl_profa: string;
+	ch_ord_repl_profa: string;
+	crd_ord_repl_profa: string;
+	crd_repl_conv_gold: string;
+	repl_alowa: string;
+	repl_alowa_2: string;
+	ch_repl_lck_gold: string;
+	crd_repl_lck_gold: string;
+	ch_ord_alow_repla: string;
+	crd_ord_alow_repla: string;
+	d2vexct_entr: string;
+	d2ch_ord_alow_amt: string;
+	return_code: number;
+	return_msg: string;
+}
