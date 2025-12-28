@@ -50,6 +50,8 @@ import {
 	KT00015Response,
 	KT00016Param,
 	KT00016Response,
+	KT00017Param,
+	KT00017Response,
 } from '@src/types';
 
 @Injectable()
@@ -372,6 +374,19 @@ export class AccountService {
 			const params: KT00016Param = { ...kt00016Param };
 			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
 			return response.data as KT00016Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async kt00017(kt00017Param: KT00017Param) {
+		try {
+			this.headers['api-id'] = 'kt00017';
+			this.headers['authorization'] = await this.oauth2.getBearerToken();
+
+			const params: KT00017Param = { ...kt00017Param };
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
+			return response.data as KT00017Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
