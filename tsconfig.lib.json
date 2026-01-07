@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "outDir": "./dist",
     "emitDeclarationOnly": false,            // JS와 타입 파일 둘 다 내보냄
