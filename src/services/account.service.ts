@@ -32,6 +32,7 @@ import {
 	KT50021Param,
 	KT50030Param,
 	KT50031Param,
+	KT50032Param,
 	KA01690Response,
 	KA10072Response,
 	KA10073Response,
@@ -62,408 +63,162 @@ import {
 	KT50021Response,
 	KT50030Response,
 	KT50031Response,
+	KT50032Response,
 } from '@src/types';
 
 @Injectable()
 export class AccountService {
 	private readonly domain: string = 'https://api.kiwoom.com';
 	private readonly url: string = '/api/dostk/acnt';
-	private readonly headers: Record<string, string>;
+	private readonly baseHeaders: Record<string, string>;
 
 	constructor(
 		private readonly httpService: HttpService,
 		private readonly oauth2: Oauth2
 	) {
-		this.headers = { 'Content-Type': 'application/json;charset=UTF-8', 'cont-yn': 'N', 'next-key': 'N' };
+		this.baseHeaders = {
+			'Content-Type': 'application/json;charset=UTF-8',
+			'cont-yn': 'N',
+			'next-key': 'N',
+		};
 	}
 
-	async ka01690(ka01690Param: KA01690Param) {
+	private async executeApiCall<TParam, TResponse>(apiId: string, params: TParam): Promise<TResponse> {
 		try {
-			this.headers['api-id'] = 'ka01690';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
+			const headers = {
+				...this.baseHeaders,
+				'api-id': apiId,
+				authorization: await this.oauth2.getBearerToken(),
+			};
 
-			const params: KA01690Param = { ...ka01690Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA01690Response;
+			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, { ...params }, { headers });
+			return response.data as TResponse;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
 	}
 
-	async ka10072(ka10072Param: KA10072Param) {
-		try {
-			this.headers['api-id'] = 'ka10072';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10072Param = { ...ka10072Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10072Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka01690(ka01690Param: KA01690Param): Promise<KA01690Response> {
+		return this.executeApiCall<KA01690Param, KA01690Response>('ka01690', ka01690Param);
 	}
 
-	async ka10073(ka10073Param: KA10073Param) {
-		try {
-			this.headers['api-id'] = 'ka10073';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10073Param = { ...ka10073Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10073Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10072(ka10072Param: KA10072Param): Promise<KA10072Response> {
+		return this.executeApiCall<KA10072Param, KA10072Response>('ka10072', ka10072Param);
 	}
 
-	async ka10074(ka10074Param: KA10074Param) {
-		try {
-			this.headers['api-id'] = 'ka10074';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10074Param = { ...ka10074Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10074Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10073(ka10073Param: KA10073Param): Promise<KA10073Response> {
+		return this.executeApiCall<KA10073Param, KA10073Response>('ka10073', ka10073Param);
 	}
 
-	async ka10075(ka10075Param: KA10075Param) {
-		try {
-			this.headers['api-id'] = 'ka10075';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10075Param = { ...ka10075Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10075Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10074(ka10074Param: KA10074Param): Promise<KA10074Response> {
+		return this.executeApiCall<KA10074Param, KA10074Response>('ka10074', ka10074Param);
 	}
 
-	async ka10076(ka10076Param: KA10076Param) {
-		try {
-			this.headers['api-id'] = 'ka10076';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10076Param = { ...ka10076Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10076Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10075(ka10075Param: KA10075Param): Promise<KA10075Response> {
+		return this.executeApiCall<KA10075Param, KA10075Response>('ka10075', ka10075Param);
 	}
 
-	async ka10077(ka10077Param: KA10077Param) {
-		try {
-			this.headers['api-id'] = 'ka10077';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10077Param = { ...ka10077Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10077Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10076(ka10076Param: KA10076Param): Promise<KA10076Response> {
+		return this.executeApiCall<KA10076Param, KA10076Response>('ka10076', ka10076Param);
 	}
 
-	async ka10085(ka10085Param: KA10085Param) {
-		try {
-			this.headers['api-id'] = 'ka10085';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10085Param = { ...ka10085Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10085Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10077(ka10077Param: KA10077Param): Promise<KA10077Response> {
+		return this.executeApiCall<KA10077Param, KA10077Response>('ka10077', ka10077Param);
 	}
 
-	async ka10088(ka10088Param: KA10088Param) {
-		try {
-			this.headers['api-id'] = 'ka10088';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10088Param = { ...ka10088Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10088Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10085(ka10085Param: KA10085Param): Promise<KA10085Response> {
+		return this.executeApiCall<KA10085Param, KA10085Response>('ka10085', ka10085Param);
 	}
 
-	async ka10170(ka10170Param: KA10170Param) {
-		try {
-			this.headers['api-id'] = 'ka10170';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KA10170Param = { ...ka10170Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KA10170Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10088(ka10088Param: KA10088Param): Promise<KA10088Response> {
+		return this.executeApiCall<KA10088Param, KA10088Response>('ka10088', ka10088Param);
 	}
 
-	async kt00001(kt00001Param: KT00001Param) {
-		try {
-			this.headers['api-id'] = 'kt00001';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00001Param = { ...kt00001Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00001Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async ka10170(ka10170Param: KA10170Param): Promise<KA10170Response> {
+		return this.executeApiCall<KA10170Param, KA10170Response>('ka10170', ka10170Param);
 	}
 
-	async kt00002(kt00002Param: KT00002Param) {
-		try {
-			this.headers['api-id'] = 'kt00002';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00002Param = { ...kt00002Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00002Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00001(kt00001Param: KT00001Param): Promise<KT00001Response> {
+		return this.executeApiCall<KT00001Param, KT00001Response>('kt00001', kt00001Param);
 	}
 
-	async kt00003(kt00003Param: KT00003Param) {
-		try {
-			this.headers['api-id'] = 'kt00003';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00003Param = { ...kt00003Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00003Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00002(kt00002Param: KT00002Param): Promise<KT00002Response> {
+		return this.executeApiCall<KT00002Param, KT00002Response>('kt00002', kt00002Param);
 	}
 
-	async kt00004(kt00004Param: KT00004Param) {
-		try {
-			this.headers['api-id'] = 'kt00004';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00004Param = { ...kt00004Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00004Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00003(kt00003Param: KT00003Param): Promise<KT00003Response> {
+		return this.executeApiCall<KT00003Param, KT00003Response>('kt00003', kt00003Param);
 	}
 
-	async kt00005(kt00005Param: KT00005Param) {
-		try {
-			this.headers['api-id'] = 'kt00005';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00005Param = { ...kt00005Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00005Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00004(kt00004Param: KT00004Param): Promise<KT00004Response> {
+		return this.executeApiCall<KT00004Param, KT00004Response>('kt00004', kt00004Param);
 	}
 
-	async kt00007(kt00007Param: KT00007Param) {
-		try {
-			this.headers['api-id'] = 'kt00007';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00007Param = { ...kt00007Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00007Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00005(kt00005Param: KT00005Param): Promise<KT00005Response> {
+		return this.executeApiCall<KT00005Param, KT00005Response>('kt00005', kt00005Param);
 	}
 
-	async kt00008(kt00008Param: KT00008Param) {
-		try {
-			this.headers['api-id'] = 'kt00008';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00008Param = { ...kt00008Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00008Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00007(kt00007Param: KT00007Param): Promise<KT00007Response> {
+		return this.executeApiCall<KT00007Param, KT00007Response>('kt00007', kt00007Param);
 	}
 
-	async kt00009(kt00009Param: KT00009Param) {
-		try {
-			this.headers['api-id'] = 'kt00009';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00009Param = { ...kt00009Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00009Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00008(kt00008Param: KT00008Param): Promise<KT00008Response> {
+		return this.executeApiCall<KT00008Param, KT00008Response>('kt00008', kt00008Param);
 	}
 
-	async kt00010(kt00010Param: KT00010Param) {
-		try {
-			this.headers['api-id'] = 'kt00010';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00010Param = { ...kt00010Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00010Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00009(kt00009Param: KT00009Param): Promise<KT00009Response> {
+		return this.executeApiCall<KT00009Param, KT00009Response>('kt00009', kt00009Param);
 	}
 
-	async kt00011(kt00011Param: KT00011Param) {
-		try {
-			this.headers['api-id'] = 'kt00011';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00011Param = { ...kt00011Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00011Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00010(kt00010Param: KT00010Param): Promise<KT00010Response> {
+		return this.executeApiCall<KT00010Param, KT00010Response>('kt00010', kt00010Param);
 	}
 
-	async kt00012(kt00012Param: KT00012Param) {
-		try {
-			this.headers['api-id'] = 'kt00012';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00012Param = { ...kt00012Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00012Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00011(kt00011Param: KT00011Param): Promise<KT00011Response> {
+		return this.executeApiCall<KT00011Param, KT00011Response>('kt00011', kt00011Param);
 	}
 
-	async kt00013(kt00013Param: KT00013Param) {
-		try {
-			this.headers['api-id'] = 'kt00013';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00013Param = { ...kt00013Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00013Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00012(kt00012Param: KT00012Param): Promise<KT00012Response> {
+		return this.executeApiCall<KT00012Param, KT00012Response>('kt00012', kt00012Param);
 	}
 
-	async kt00015(kt00015Param: KT00015Param) {
-		try {
-			this.headers['api-id'] = 'kt00015';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00015Param = { ...kt00015Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00015Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00013(kt00013Param: KT00013Param): Promise<KT00013Response> {
+		return this.executeApiCall<KT00013Param, KT00013Response>('kt00013', kt00013Param);
 	}
 
-	async kt00016(kt00016Param: KT00016Param) {
-		try {
-			this.headers['api-id'] = 'kt00016';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00016Param = { ...kt00016Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00016Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00015(kt00015Param: KT00015Param): Promise<KT00015Response> {
+		return this.executeApiCall<KT00015Param, KT00015Response>('kt00015', kt00015Param);
 	}
 
-	async kt00017(kt00017Param: KT00017Param) {
-		try {
-			this.headers['api-id'] = 'kt00017';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00017Param = { ...kt00017Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00017Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00016(kt00016Param: KT00016Param): Promise<KT00016Response> {
+		return this.executeApiCall<KT00016Param, KT00016Response>('kt00016', kt00016Param);
 	}
 
-	async kt00018(kt00018Param: KT00018Param) {
-		try {
-			this.headers['api-id'] = 'kt00018';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT00018Param = { ...kt00018Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT00018Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00017(kt00017Param: KT00017Param): Promise<KT00017Response> {
+		return this.executeApiCall<KT00017Param, KT00017Response>('kt00017', kt00017Param);
 	}
 
-	async kt50020(kt50020Param: KT50020Param) {
-		try {
-			this.headers['api-id'] = 'kt50020';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT50020Param = { ...kt50020Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT50020Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt00018(kt00018Param: KT00018Param): Promise<KT00018Response> {
+		return this.executeApiCall<KT00018Param, KT00018Response>('kt00018', kt00018Param);
 	}
 
-	async kt50021(kt50021Param: KT50021Param) {
-		try {
-			this.headers['api-id'] = 'kt50021';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT50021Param = { ...kt50021Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT50021Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt50020(kt50020Param: KT50020Param): Promise<KT50020Response> {
+		return this.executeApiCall<KT50020Param, KT50020Response>('kt50020', kt50020Param);
 	}
 
-	async kt50030(kt50030Param: KT50030Param) {
-		try {
-			this.headers['api-id'] = 'kt50030';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
-
-			const params: KT50030Param = { ...kt50030Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT50030Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt50021(kt50021Param: KT50021Param): Promise<KT50021Response> {
+		return this.executeApiCall<KT50021Param, KT50021Response>('kt50021', kt50021Param);
 	}
 
-	async kt50031(kt50031Param: KT50031Param) {
-		try {
-			this.headers['api-id'] = 'kt50031';
-			this.headers['authorization'] = await this.oauth2.getBearerToken();
+	async kt50030(kt50030Param: KT50030Param): Promise<KT50030Response> {
+		return this.executeApiCall<KT50030Param, KT50030Response>('kt50030', kt50030Param);
+	}
 
-			const params: KT50031Param = { ...kt50031Param };
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, params, { headers: this.headers });
-			return response.data as KT50031Response;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	async kt50031(kt50031Param: KT50031Param): Promise<KT50031Response> {
+		return this.executeApiCall<KT50031Param, KT50031Response>('kt50031', kt50031Param);
+	}
+
+	async kt50032(kt50032Param: KT50032Param): Promise<KT50032Response> {
+		return this.executeApiCall<KT50032Param, KT50032Response>('kt50032', kt50032Param);
 	}
 }
