@@ -29,3 +29,4 @@ export * from './kt50021';
 export * from './kt50030';
 export * from './kt50031';
 export * from './kt50032';
+export * from './kt50075';

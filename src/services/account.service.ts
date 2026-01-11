@@ -33,6 +33,7 @@ import {
 	KT50030Param,
 	KT50031Param,
 	KT50032Param,
+	KT50075Param,
 	KA01690Response,
 	KA10072Response,
 	KA10073Response,
@@ -64,6 +65,7 @@ import {
 	KT50030Response,
 	KT50031Response,
 	KT50032Response,
+	KT50075Response,
 } from '@src/types';
 
 @Injectable()
@@ -220,5 +222,9 @@ export class AccountService {
 
 	async kt50032(kt50032Param: KT50032Param): Promise<KT50032Response> {
 		return this.executeApiCall<KT50032Param, KT50032Response>('kt50032', kt50032Param);
+	}
+
+	async kt50075(kt50075Param: KT50075Param): Promise<KT50075Response> {
+		return this.executeApiCall<KT50075Param, KT50075Response>('kt50075', kt50075Param);
 	}
 }
