@@ -92,7 +92,6 @@ export class AccountService {
 				'api-id': apiId,
 				authorization: await this.oauth2.getBearerToken(),
 			};
-
 			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, { ...params }, { headers });
 			return response.data as TResponse;
 		} catch (e) {
