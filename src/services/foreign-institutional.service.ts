@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Oauth2 } from '@services/oauth2.service';
-import { KA10008Param, KA10008Response, KA10009Param, KA10009Response } from '@src/types';
+import { KA10008Param, KA10008Response, KA10009Param, KA10009Response, KA10131Param, KA10131Response } from '@src/types';
 
 @Injectable()
 export class ForeignInstitutionalService {
@@ -40,5 +40,9 @@ export class ForeignInstitutionalService {
 
 	async ka10009(ka10009Param: KA10009Param): Promise<KA10009Response> {
 		return this.executeApiCall<KA10009Param, KA10009Response>('ka10009', ka10009Param);
+	}
+
+	async ka10131(ka10131Param: KA10131Param): Promise<KA10131Response> {
+		return this.executeApiCall<KA10131Param, KA10131Response>('ka10131', ka10131Param);
 	}
 }
