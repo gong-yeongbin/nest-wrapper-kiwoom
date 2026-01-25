@@ -4,3 +4,4 @@ export * from './account';
 export * from './etf';
 export * from './foreign-institutional';
 export * from './securities-lending-borrowing';
+export * from './rank-info';
