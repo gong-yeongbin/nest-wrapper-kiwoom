@@ -1,7 +1,18 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { Oauth2 } from '@services/oauth2.service';
-import { KA10020Param, KA10020Response, KA10021Param, KA10021Response, KA10022Param, KA10022Response, KA10023Param, KA10023Response } from '@src/types';
+import {
+	KA10020Param,
+	KA10020Response,
+	KA10021Param,
+	KA10021Response,
+	KA10022Param,
+	KA10022Response,
+	KA10023Param,
+	KA10023Response,
+	KA10027Param,
+	KA10027Response,
+} from '@src/types';
 
 @Injectable()
 export class RankInfoService {
@@ -48,5 +59,9 @@ export class RankInfoService {
 
 	async ka10023(ka10023Param: KA10023Param): Promise<KA10023Response> {
 		return this.executeApiCall<KA10023Param, KA10023Response>('ka10023', ka10023Param);
+	}
+
+	async ka10027(ka10027Param: KA10027Param): Promise<KA10027Response> {
+		return this.executeApiCall<KA10027Param, KA10027Response>('ka10027', ka10027Param);
 	}
 }
