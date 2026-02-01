@@ -24,7 +24,7 @@ interface ExpCntrFluRtUpper {
 }
 
 export interface KA10029Response {
-	exp_cntr_flu_rt_upper: any;
+	exp_cntr_flu_rt_upper: ExpCntrFluRtUpper[];
 	return_code: number;
 	return_msg: string;
 }
