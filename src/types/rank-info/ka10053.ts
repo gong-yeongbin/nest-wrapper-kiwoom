@@ -1,7 +1,6 @@
 export interface KA10053Param {
 	stk_cd: string;
 }
-
 interface TdyUpperScesnOri {
 	sel_scesn_tm: string;
 	sell_qty: string;
