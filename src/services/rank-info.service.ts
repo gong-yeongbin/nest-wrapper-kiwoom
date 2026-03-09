@@ -42,6 +42,8 @@ import {
 	KA10053Response,
 	KA10062Param,
 	KA10062Response,
+	KA10065Param,
+	KA10065Response,
 } from '@src/types';
 
 @Injectable()
@@ -153,5 +155,9 @@ export class RankInfoService {
 
 	async ka10062(ka10062Param: KA10062Param): Promise<KA10062Response> {
 		return this.executeApiCall<KA10062Param, KA10062Response>('ka10062', ka10062Param);
+	}
+
+	async ka10065(ka10065Param: KA10065Param): Promise<KA10065Response> {
+		return this.executeApiCall<KA10065Param, KA10065Response>('ka10065', ka10065Param);
 	}
 }
