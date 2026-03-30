@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
+		"rootDir": "./src",
 		"declaration": true,
 		"outDir": "./dist",
 		"emitDeclarationOnly": false, // JS와 타입 파일 둘 다 내보냄
@@ -8,8 +8,6 @@
 		"removeComments": true, // JS에서 주석 제거
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-		"rootDir": "./src",
-		"ignoreDeprecations": "6.0",
 		"paths": {
 			"@src/*": ["./src/*"],
 			"@interfaces/*": ["./src/interfaces/*"],
