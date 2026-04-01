@@ -2,24 +2,16 @@
 	"compilerOptions": {
 		"target": "ES2021",
 		"module": "CommonJS",
-		"moduleResolution": "node",
+		"moduleResolution": "node16",
 		"lib": ["ES2021"],
 		"baseUrl": "./",
 		"rootDir": "./src",
 		"outDir": "./dist",
-
-		/* 1. Node.js 타입 에러 해결 (Buffer, stream 등) */
 		"types": ["node"],
 		"skipLibCheck": true,
-
-		/* 2. 'e' is of type 'unknown' 에러 해결 */
 		"useUnknownInCatchVariables": false,
-
-		/* 3. dayjs 호출 에러 해결 */
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-
-		/* 4. property has no initializer 에러 해결 */
 		"strictPropertyInitialization": false,
 		"declaration": true,
 		"sourceMap": true,
