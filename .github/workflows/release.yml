@@ -12,6 +12,12 @@ permissions:
 
 jobs:
   release:
+    if: github.event.pull_request.merged == true && (
+      contains(github.event.pull_request.labels.*.name, 'major') ||
+      contains(github.event.pull_request.labels.*.name, 'minor') ||
+      contains(github.event.pull_request.labels.*.name, 'patch')
+      )
+
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
@@ -30,19 +36,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8 # 사용 중인 pnpm 버전에 맞춰 고정하는 것이 안전합니다.
+
       - name: Set node
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
           registry-url: "https://registry.npmjs.org"
+          cache: 'pnpm' # pnpm 캐싱을 활성화하여 빌드 속도를 높입니다.
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          run_install: |
-            - args: [--frozen-lockfile]
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
 
-      - run: pnpm install
       - run: pnpm build
 
       - name: Release Major
