@@ -7,3 +7,4 @@ export * from './foreign-institutional.service';
 export * from './securities-lending-borrowing.service';
 export * from './rank-info.service';
 export * from './market-condition.service';
+export * from './credit-order.service';
