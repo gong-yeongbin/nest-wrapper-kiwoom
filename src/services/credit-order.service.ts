@@ -1,7 +1,16 @@
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {HttpService} from '@nestjs/axios';
 import {Oauth2} from '@services/oauth2.service';
-import {KT10006Param, KT10006Response, KT10007Param, KT10007Response, KT10008Param, KT10008Response} from '@src/types';
+import {
+	KT10006Param,
+	KT10006Response,
+	KT10007Param,
+	KT10007Response,
+	KT10008Param,
+	KT10008Response,
+	KT10009Param,
+	KT10009Response
+} from '@src/types';
 
 @Injectable()
 export class CreditOrderService {
@@ -44,5 +53,9 @@ export class CreditOrderService {
 
 	async kt10008(kt10008Param: KT10008Param): Promise<KT10008Response> {
 		return this.executeApiCall<KT10008Param, KT10008Response>('kt10008', kt10008Param);
+	}
+
+	async kt10009(kt10009Param: KT10009Param): Promise<KT10009Response> {
+		return this.executeApiCall<KT10009Param, KT10009Response>('kt10009', kt10009Param);
 	}
 }
