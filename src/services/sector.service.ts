@@ -1,7 +1,16 @@
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {HttpService} from '@nestjs/axios';
 import {Oauth2} from '@services/oauth2.service';
-import {KA10010Param, KA10010Response, KA10051Param, KA10051Response, KA20001Param, KA20001Response} from '@src/types';
+import {
+	KA10010Param,
+	KA10010Response,
+	KA10051Param,
+	KA10051Response,
+	KA20001Param,
+	KA20001Response,
+	KA20002Param,
+	KA20002Response
+} from '@src/types';
 
 @Injectable()
 export class SectorService {
@@ -44,5 +53,9 @@ export class SectorService {
 
 	async ka20001(ka20001Param: KA20001Param): Promise<KA20001Response> {
 		return this.executeApiCall<KA20001Param, KA20001Response>('ka20001', ka20001Param);
+	}
+
+	async ka20002(ka20002Param: KA20002Param): Promise<KA20002Response> {
+		return this.executeApiCall<KA20002Param, KA20002Response>('ka20002', ka20002Param);
 	}
 }
