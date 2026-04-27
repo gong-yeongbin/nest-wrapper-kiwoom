@@ -9,7 +9,9 @@ import {
 	KA20001Param,
 	KA20001Response,
 	KA20002Param,
-	KA20002Response
+	KA20002Response,
+	KA20003Param,
+	KA20003Response,
 } from '@src/types';
 
 @Injectable()
@@ -57,5 +59,9 @@ export class SectorService {
 
 	async ka20002(ka20002Param: KA20002Param): Promise<KA20002Response> {
 		return this.executeApiCall<KA20002Param, KA20002Response>('ka20002', ka20002Param);
+	}
+
+	async ka20003(ka20003Param: KA20003Param): Promise<KA20003Response> {
+		return this.executeApiCall<KA20003Param, KA20003Response>('ka20003', ka20003Param);
 	}
 }
