@@ -3,3 +3,4 @@ export * from './ka10051';
 export * from './ka20001';
 export * from './ka20002';
 export * from './ka20003';
+export * from './ka20009';
