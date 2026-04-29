@@ -8,3 +8,4 @@ export * from './rank-info';
 export * from './market-condition';
 export * from './credit-order';
 export * from './sector';
+export * from './stock-info';
