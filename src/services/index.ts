@@ -9,3 +9,4 @@ export * from './rank-info.service';
 export * from './market-condition.service';
 export * from './credit-order.service';
 export * from './sector.service';
+export * from './stock-info.service';
