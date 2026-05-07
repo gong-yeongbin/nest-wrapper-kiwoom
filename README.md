@@ -40,7 +40,7 @@ npm install nest-wrapper-kiwoom
 
 ## 참고 자료
 
-- [키움증권 REST API 공식 사이트](https://openapi.kiwoom.com)
+- 키움 API 명세서 : ./키움 REST API 문서.xlsx
 
 ## 라이선스
 
