@@ -34,7 +34,8 @@
     "prettier": "^3.6.2",
     "release-it": "^19.0.6",
     "release-it-pnpm": "^4.6.6",
-    "rimraf": "^6.1.0"
+    "rimraf": "^6.1.0",
+    "tsc-alias": "^1.8.17"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",
