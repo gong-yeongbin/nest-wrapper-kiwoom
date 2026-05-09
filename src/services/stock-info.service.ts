@@ -13,7 +13,9 @@ import {
 	KA10013Param,
 	KA10013Response,
 	KA10015Param,
-	KA10015Response
+	KA10015Response,
+	KA10016Param,
+	KA10016Response
 } from '@src/types';
 
 @Injectable()
@@ -69,5 +71,9 @@ export class StockInfoService {
 
 	async ka10015(ka10015Param: KA10015Param): Promise<KA10015Response> {
 		return this.executeApiCall<KA10015Param, KA10015Response>('ka10015', ka10015Param);
+	}
+
+	async ka10016(ka10016Param: KA10016Param): Promise<KA10016Response> {
+		return this.executeApiCall<KA10016Param, KA10016Response>('ka10016', ka10016Param);
 	}
 }
