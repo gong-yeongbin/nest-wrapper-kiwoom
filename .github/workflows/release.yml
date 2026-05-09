@@ -51,16 +51,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - run: pnpm build
+      - name: Build project
+        run: pnpm build
 
       - name: Release Major
         if: contains(join(github.event.pull_request.labels.*.name, ','), 'major')
-        run: npx release-it major --ci
+        run: npx release-it major --ci --no-git.requireCleanWorkingDir
 
       - name: Release Minor
         if: contains(join(github.event.pull_request.labels.*.name, ','), 'minor')
-        run: npx release-it minor --ci
+        run: npx release-it minor --ci --no-git.requireCleanWorkingDir
 
       - name: Release Patch
         if: contains(join(github.event.pull_request.labels.*.name, ','), 'patch')
-        run: npx release-it patch --ci
+        run: npx release-it patch --ci --no-git.requireCleanWorkingDir
