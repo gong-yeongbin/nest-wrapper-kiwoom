@@ -7,6 +7,7 @@
 		"tag": true,
 		"push": true,
 		"commitMessage": "chore: release ${version}",
-		"tagName": "v${version}"
+		"tagName": "v${version}",
+		"requireCleanWorkingDir": false
 	}
 }
