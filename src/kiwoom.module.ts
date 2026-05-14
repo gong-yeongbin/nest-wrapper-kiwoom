@@ -2,7 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { KiwoomAsyncOptions, KiwoomOptions } from './interfaces';
 import { KIWOOM_MODULE_OPTIONS } from './kiwoom.constants';
 import { HttpModule } from '@nestjs/axios';
-import { AccountService, ETFService, ForeignInstitutionalService, Oauth2, OrderService, RankInfoService, ShortSaleService } from '@src/services';
+import { AccountService, ChartService, ETFService, ForeignInstitutionalService, Oauth2, OrderService, RankInfoService, ShortSaleService } from '@src/services';
 
 @Module({
 	imports: [HttpModule],
@@ -21,8 +21,9 @@ export class KiwoomModule {
 				ShortSaleService,
 				ForeignInstitutionalService,
 				RankInfoService,
+				ChartService,
 			],
-			exports: [ETFService, OrderService, AccountService, ShortSaleService, ForeignInstitutionalService, RankInfoService],
+			exports: [ETFService, OrderService, AccountService, ShortSaleService, ForeignInstitutionalService, RankInfoService, ChartService],
 		};
 	}
 
@@ -39,8 +40,9 @@ export class KiwoomModule {
 				ShortSaleService,
 				ForeignInstitutionalService,
 				RankInfoService,
+				ChartService,
 			],
-			exports: [ETFService, OrderService, AccountService, ShortSaleService, ForeignInstitutionalService, RankInfoService],
+			exports: [ETFService, OrderService, AccountService, ShortSaleService, ForeignInstitutionalService, RankInfoService, ChartService],
 		};
 	}
 }
