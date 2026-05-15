@@ -1,6 +1,8 @@
-import {Injectable, InternalServerErrorException} from '@nestjs/common';
+// 순위 정보 관련 API를 제공하는 서비스
+import {Injectable} from '@nestjs/common';
 import {HttpService} from '@nestjs/axios';
 import {Oauth2} from '@services/oauth2.service';
+import {BaseApiService} from './base-api.service';
 import {
 	KA10020Param,
 	KA10020Response,
@@ -51,34 +53,11 @@ import {
 } from '@src/types';
 
 @Injectable()
-export class RankInfoService {
-	private readonly domain: string = 'https://api.kiwoom.com';
-	private readonly url: string = '/api/dostk/rkinfo';
-	private readonly baseHeaders: Record<string, string>;
+export class RankInfoService extends BaseApiService {
+	protected readonly url = '/api/dostk/rkinfo';
 
-	constructor(
-		private readonly httpService: HttpService,
-		private readonly oauth2: Oauth2
-	) {
-		this.baseHeaders = {
-			'Content-Type': 'application/json;charset=UTF-8',
-			'cont-yn': 'N',
-			'next-key': 'N',
-		};
-	}
-
-	private async executeApiCall<TParam, TResponse>(apiId: string, params: TParam): Promise<TResponse> {
-		try {
-			const headers = {
-				...this.baseHeaders,
-				'api-id': apiId,
-				authorization: await this.oauth2.getBearerToken(),
-			};
-			const response = await this.httpService.axiosRef.post(`${this.domain}${this.url}`, { ...params }, { headers });
-			return response.data as TResponse;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
-		}
+	constructor(httpService: HttpService, oauth2: Oauth2) {
+		super(httpService, oauth2);
 	}
 
 	async ka10020(ka10020Param: KA10020Param): Promise<KA10020Response> {
