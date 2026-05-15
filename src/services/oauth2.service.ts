@@ -9,31 +9,35 @@ import dayjs from 'dayjs';
 export class Oauth2 {
 	private readonly headers: Record<string, string>;
 	private readonly body: Record<string, string>;
-	private readonly auth: Record<string, string>;
+	private expiresDt = '0';
+	private bearerToken = '';
+	private refreshPromise: Promise<string> | null = null;
 
 	constructor(
 		@Inject(KIWOOM_MODULE_OPTIONS) private readonly option: KiwoomOptions,
 		private readonly httpService: HttpService
 	) {
-		this.auth = { expires_dt: '0' };
 		this.headers = { 'Content-Type': 'application/json;charset=UTF-8' };
 		this.body = { appkey: this.option.appKey, secretkey: this.option.secretKey };
 	}
 
 	async getBearerToken(): Promise<string> {
-		const expiresDt: string = this.auth.expires_dt;
-		const nowDt: string = dayjs().format('YYYYMMDDHHmmss');
+		const nowDt = dayjs().format('YYYYMMDDHHmmss');
 
-		if (parseInt(expiresDt) > parseInt(nowDt)) {
-			return this.auth.bearer_token;
-		} else {
-			const response = await this.au10001();
-			const expiresDt = response.expires_dt;
-			const bearerToken = `${response.token_type} ${response.token}`;
-			this.auth.expires_dt = expiresDt;
-			this.auth.bearer_token = bearerToken;
-			return bearerToken;
+		if (parseInt(this.expiresDt) > parseInt(nowDt)) {
+			return this.bearerToken;
 		}
+
+		if (!this.refreshPromise) {
+			this.refreshPromise = this.au10001().then((response) => {
+				this.expiresDt = response.expires_dt;
+				this.bearerToken = `${response.token_type} ${response.token}`;
+				this.refreshPromise = null;
+				return this.bearerToken;
+			});
+		}
+
+		return this.refreshPromise;
 	}
 
 	async au10001(): Promise<AU10001Response> {

@@ -1,7 +1,8 @@
 // 키움 REST API 공통 호출 로직을 제공하는 추상 기반 서비스
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { Oauth2 } from '@services/oauth2.service';
+import { KiwoomApiException } from '@src/kiwoom.exception';
 
 @Injectable()
 export abstract class BaseApiService {
@@ -19,17 +20,19 @@ export abstract class BaseApiService {
 		private readonly oauth2: Oauth2,
 	) {}
 
-	protected async executeApiCall<TParam, TResponse>(apiId: string, params: TParam): Promise<TResponse> {
-		try {
-			const headers = {
-				...this.baseHeaders,
-				'api-id': apiId,
-				authorization: await this.oauth2.getBearerToken(),
-			};
-			const response = await this.httpService.axiosRef.post(`${BaseApiService.DOMAIN}${this.url}`, { ...params }, { headers });
-			return response.data as TResponse;
-		} catch (e) {
-			throw new InternalServerErrorException(e.message);
+	protected async executeApiCall<TParam, TResponse extends { return_code: number; return_msg: string }>(apiId: string, params: TParam): Promise<TResponse> {
+		const headers = {
+			...this.baseHeaders,
+			'api-id': apiId,
+			authorization: await this.oauth2.getBearerToken(),
+		};
+		const response = await this.httpService.axiosRef.post(`${BaseApiService.DOMAIN}${this.url}`, { ...params }, { headers });
+		const data = response.data as TResponse;
+
+		if (data.return_code !== 0) {
+			throw new KiwoomApiException(apiId, data.return_code, data.return_msg);
 		}
+
+		return data;
 	}
 }
