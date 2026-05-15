@@ -38,9 +38,7 @@ export class Oauth2 {
 
 	async au10001(): Promise<AU10001Response> {
 		try {
-			this.body.grant_type = 'client_credentials';
-
-			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/oauth2/token', this.body, { headers: this.headers });
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/oauth2/token', { ...this.body, grant_type: 'client_credentials' }, { headers: this.headers });
 			return response.data as AU10001Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
@@ -49,9 +47,7 @@ export class Oauth2 {
 
 	async au10002(token: string): Promise<AU10002Response> {
 		try {
-			this.body.token = token;
-
-			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/oauth2/revoke', this.body, { headers: this.headers });
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/oauth2/revoke', { ...this.body, token }, { headers: this.headers });
 			return response.data as AU10002Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
