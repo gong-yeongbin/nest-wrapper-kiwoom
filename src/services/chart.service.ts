@@ -2,7 +2,7 @@
 import {HttpService} from '@nestjs/axios';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {Oauth2} from '@services/oauth2.service';
-import {KA10060Param, KA10060Response, KA10064Param, KA10064Response, KA10079Param, KA10079Response, KA10080Param, KA10080Response, KA10081Param, KA10081Response, KA10082Param, KA10082Response, KA10083Param, KA10083Response} from '@src/types';
+import {KA10060Param, KA10060Response, KA10064Param, KA10064Response, KA10079Param, KA10079Response, KA10080Param, KA10080Response, KA10081Param, KA10081Response, KA10082Param, KA10082Response, KA10083Param, KA10083Response, KA10094Param, KA10094Response} from '@src/types';
 
 @Injectable()
 export class ChartService {
@@ -61,5 +61,9 @@ export class ChartService {
 
 	async ka10083(ka10083Param: KA10083Param): Promise<KA10083Response> {
 		return this.executeApiCall<KA10083Param, KA10083Response>('ka10083', ka10083Param);
+	}
+
+	async ka10094(ka10094Param: KA10094Param): Promise<KA10094Response> {
+		return this.executeApiCall<KA10094Param, KA10094Response>('ka10094', ka10094Param);
 	}
 }
