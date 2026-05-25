@@ -2,7 +2,7 @@
 import {HttpService} from '@nestjs/axios';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {Oauth2} from '@services/oauth2.service';
-import {KA10060Param, KA10060Response, KA10064Param, KA10064Response, KA10079Param, KA10079Response, KA10080Param, KA10080Response, KA10081Param, KA10081Response, KA10082Param, KA10082Response, KA10083Param, KA10083Response, KA10094Param, KA10094Response, KA20004Param, KA20004Response, KA20005Param, KA20005Response, KA20006Param, KA20006Response, KA20007Param, KA20007Response, KA20008Param, KA20008Response} from '@src/types';
+import {KA10060Param, KA10060Response, KA10064Param, KA10064Response, KA10079Param, KA10079Response, KA10080Param, KA10080Response, KA10081Param, KA10081Response, KA10082Param, KA10082Response, KA10083Param, KA10083Response, KA10094Param, KA10094Response, KA20004Param, KA20004Response, KA20005Param, KA20005Response, KA20006Param, KA20006Response, KA20007Param, KA20007Response, KA20008Param, KA20008Response, KA20019Param, KA20019Response} from '@src/types';
 
 @Injectable()
 export class ChartService {
@@ -85,5 +85,9 @@ export class ChartService {
 
 	async ka20008(ka20008Param: KA20008Param): Promise<KA20008Response> {
 		return this.executeApiCall<KA20008Param, KA20008Response>('ka20008', ka20008Param);
+	}
+
+	async ka20019(ka20019Param: KA20019Param): Promise<KA20019Response> {
+		return this.executeApiCall<KA20019Param, KA20019Response>('ka20019', ka20019Param);
 	}
 }
