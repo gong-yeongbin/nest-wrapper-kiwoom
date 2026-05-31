@@ -4,3 +4,6 @@ export * from './ka30001';
 export * from './ka30002';
 export * from './ka30003';
 export * from './ka30004';
+export * from './ka30005';
+export * from './ka30009';
+export * from './ka30010';
