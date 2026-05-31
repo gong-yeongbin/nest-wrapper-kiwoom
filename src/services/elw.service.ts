@@ -1,7 +1,7 @@
 // ELW 관련 API를 처리하는 서비스
 import { Injectable, InternalServerErrorException, OnModuleInit } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { KA10048Param, KA10048Response, KA10050Param, KA10050Response, KA30001Param, KA30001Response, KA30002Param, KA30002Response, KA30003Param, KA30003Response, KA30004Param, KA30004Response } from '@src/types';
+import { KA10048Param, KA10048Response, KA10050Param, KA10050Response, KA30001Param, KA30001Response, KA30002Param, KA30002Response, KA30003Param, KA30003Response, KA30004Param, KA30004Response, KA30005Param, KA30005Response, KA30009Param, KA30009Response, KA30010Param, KA30010Response } from '@src/types';
 import { Oauth2 } from '@services/oauth2.service';
 
 @Injectable()
@@ -56,5 +56,17 @@ export class ElwService implements OnModuleInit {
 
 	async ka30004(params: KA30004Param): Promise<KA30004Response> {
 		return this.executeApiCall<KA30004Param, KA30004Response>('ka30004', params);
+	}
+
+	async ka30005(params: KA30005Param): Promise<KA30005Response> {
+		return this.executeApiCall<KA30005Param, KA30005Response>('ka30005', params);
+	}
+
+	async ka30009(params: KA30009Param): Promise<KA30009Response> {
+		return this.executeApiCall<KA30009Param, KA30009Response>('ka30009', params);
+	}
+
+	async ka30010(params: KA30010Param): Promise<KA30010Response> {
+		return this.executeApiCall<KA30010Param, KA30010Response>('ka30010', params);
 	}
 }
