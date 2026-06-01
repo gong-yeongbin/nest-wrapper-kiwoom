@@ -7,3 +7,5 @@ export * from './ka30004';
 export * from './ka30005';
 export * from './ka30009';
 export * from './ka30010';
+export * from './ka30011';
+export * from './ka30012';
