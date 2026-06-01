@@ -1,0 +1,75 @@
+// ELW종목상세정보요청 타입 정의
+
+export interface KA30012Param {
+	stk_cd: string; // 종목코드
+}
+
+export interface KA30012Response {
+	aset_cd: string; // 자산코드
+	cur_prc: string; // 현재가
+	pred_pre_sig: string; // 전일대비기호
+	pred_pre: string; // 전일대비
+	flu_rt: string; // 등락율
+	lpmmcm_nm: string; // LP회원사명
+	lpmmcm_nm_1: string; // LP회원사명1
+	lpmmcm_nm_2: string; // LP회원사명2
+	elwrght_cntn: string; // ELW권리내용
+	elwexpr_evlt_pric: string; // ELW만기평가가격
+	elwtheory_pric: string; // ELW이론가
+	dispty_rt: string; // 괴리율
+	elwinnr_vltl: string; // ELW내재변동성
+	exp_rght_pric: string; // 예상권리가
+	elwpl_qutr_rt: string; // ELW손익분기율
+	elwexec_pric: string; // ELW행사가
+	elwcnvt_rt: string; // ELW전환비율
+	elwcmpn_rt: string; // ELW보상율
+	elwpric_rising_part_rt: string; // ELW가격상승참여율
+	elwrght_type: string; // ELW권리유형
+	elwsrvive_dys: string; // ELW잔존일수
+	stkcnt: string; // 주식수
+	elwlpord_pos: string; // ELWLP주문가능
+	lpposs_rt: string; // LP보유비율
+	lprmnd_qty: string; // LP보유수량
+	elwspread: string; // ELW스프레드
+	elwprty: string; // ELW패리티
+	elwgear: string; // ELW기어링
+	elwflo_dt: string; // ELW상장일
+	elwfin_trde_dt: string; // ELW최종거래일
+	expr_dt: string; // 만기일
+	exec_dt: string; // 행사일
+	lpsuply_end_dt: string; // LP공급종료일
+	elwpay_dt: string; // ELW지급일
+	elwinvt_ix_comput: string; // ELW투자지표산출
+	elwpay_agnt: string; // ELW지급대리인
+	elwappr_way: string; // ELW결재방법
+	elwrght_exec_way: string; // ELW권리행사방식
+	elwpblicte_orgn: string; // ELW발행기관
+	dcsn_pay_amt: string; // 확정지급액
+	kobarr: string; // KO베리어
+	iv: string; // IV
+	clsprd_end_elwocr: string; // 종기종료ELW발생
+	bsis_aset_1: string; // 기초자산1
+	bsis_aset_comp_rt_1: string; // 기초자산구성비율1
+	bsis_aset_2: string; // 기초자산2
+	bsis_aset_comp_rt_2: string; // 기초자산구성비율2
+	bsis_aset_3: string; // 기초자산3
+	bsis_aset_comp_rt_3: string; // 기초자산구성비율3
+	bsis_aset_4: string; // 기초자산4
+	bsis_aset_comp_rt_4: string; // 기초자산구성비율4
+	bsis_aset_5: string; // 기초자산5
+	bsis_aset_comp_rt_5: string; // 기초자산구성비율5
+	fr_dt: string; // 평가시작일자
+	to_dt: string; // 평가종료일자
+	fr_tm: string; // 평가시작시간
+	evlt_end_tm: string; // 평가종료시간
+	evlt_pric: string; // 평가가격
+	evlt_fnsh_yn: string; // 평가완료여부
+	all_hgst_pric: string; // 전체최고가
+	all_lwst_pric: string; // 전체최저가
+	imaf_hgst_pric: string; // 직후최고가
+	imaf_lwst_pric: string; // 직후최저가
+	sndhalf_mrkt_hgst_pric: string; // 후반장최고가
+	sndhalf_mrkt_lwst_pric: string; // 후반장최저가
+	return_code: number;
+	return_msg: string;
+}
