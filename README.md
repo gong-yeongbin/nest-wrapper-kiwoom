@@ -28,7 +28,7 @@ npm install nest-wrapper-kiwoom
 - 주문 (추후 지원 예정)
 - 차트
 - 테마
-- ELW (추후 지원 예정)
+- ELW
 - ETF
 
 ## 시작하기
