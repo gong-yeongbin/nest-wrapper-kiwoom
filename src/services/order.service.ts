@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, OnModuleInit } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { Oauth2 } from '@services/oauth2.service';
-import { KT10000Param, KT10000Response, KT10001Param, KT10001Response, KT10002Param, KT10002Response } from '@src/types';
+import { KT10000Param, KT10000Response, KT10001Param, KT10001Response, KT10002Param, KT10002Response, KT10003Param, KT10003Response, KT50000Param, KT50000Response, KT50001Param, KT50001Response } from '@src/types';
 
 @Injectable()
 export class OrderService implements OnModuleInit {
@@ -47,6 +47,42 @@ export class OrderService implements OnModuleInit {
 
 			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
 			return response.data as KT10002Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async kt10003(kt10003Param: KT10003Param): Promise<KT10003Response> {
+		try {
+			const headers = { ...this.headers, 'api-id': 'kt10003' };
+			const params = { ...kt10003Param };
+
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
+			return response.data as KT10003Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async kt50000(kt50000Param: KT50000Param): Promise<KT50000Response> {
+		try {
+			const headers = { ...this.headers, 'api-id': 'kt50000' };
+			const params = { ...kt50000Param };
+
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
+			return response.data as KT50000Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async kt50001(kt50001Param: KT50001Param): Promise<KT50001Response> {
+		try {
+			const headers = { ...this.headers, 'api-id': 'kt50001' };
+			const params = { ...kt50001Param };
+
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
+			return response.data as KT50001Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
