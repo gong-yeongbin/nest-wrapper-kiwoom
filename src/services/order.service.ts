@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, OnModuleInit } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { Oauth2 } from '@services/oauth2.service';
-import { KT10000Param, KT10000Response, KT10001Param, KT10001Response, KT10002Param, KT10002Response, KT10003Param, KT10003Response, KT50000Param, KT50000Response, KT50001Param, KT50001Response } from '@src/types';
+import { KT10000Param, KT10000Response, KT10001Param, KT10001Response, KT10002Param, KT10002Response, KT10003Param, KT10003Response, KT50000Param, KT50000Response, KT50001Param, KT50001Response, KT50002Param, KT50002Response, KT50003Param, KT50003Response } from '@src/types';
 
 @Injectable()
 export class OrderService implements OnModuleInit {
@@ -83,6 +83,30 @@ export class OrderService implements OnModuleInit {
 
 			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
 			return response.data as KT50001Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async kt50002(kt50002Param: KT50002Param): Promise<KT50002Response> {
+		try {
+			const headers = { ...this.headers, 'api-id': 'kt50002' };
+			const params = { ...kt50002Param };
+
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
+			return response.data as KT50002Response;
+		} catch (e) {
+			throw new InternalServerErrorException(e.message);
+		}
+	}
+
+	async kt50003(kt50003Param: KT50003Param): Promise<KT50003Response> {
+		try {
+			const headers = { ...this.headers, 'api-id': 'kt50003' };
+			const params = { ...kt50003Param };
+
+			const response = await this.httpService.axiosRef.post('https://api.kiwoom.com/api/dostk/ordr', params, { headers });
+			return response.data as KT50003Response;
 		} catch (e) {
 			throw new InternalServerErrorException(e.message);
 		}
