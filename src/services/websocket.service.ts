@@ -1,10 +1,8 @@
 // 키움 실시간시세 WebSocket 연결·인증·구독을 공통 관리하는 서비스
 import { EventEmitter } from 'events';
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import WebSocket from 'ws';
 import { Oauth2 } from './oauth2.service';
-import { KIWOOM_MODULE_OPTIONS } from '@src/kiwoom.constants';
-import { KiwoomOptions } from '@src/interfaces';
 
 /** 실시간 등록/해지 요청 시 한 종목·항목 묶음 */
 export interface RealtimeRegisterItem {
@@ -34,10 +32,7 @@ export class KiwoomWebSocketService extends EventEmitter {
 	private socket?: WebSocket;
 	private connecting?: Promise<void>; // 동시 register() 시 connect 중복 방지
 
-	constructor(
-		@Inject(KIWOOM_MODULE_OPTIONS) private readonly option: KiwoomOptions,
-		private readonly oauth2: Oauth2,
-	) {
+	constructor(private readonly oauth2: Oauth2) {
 		super();
 	}
 
