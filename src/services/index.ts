@@ -13,3 +13,4 @@ export * from './stock-info.service';
 export * from './chart.service';
 export * from './theme.service';
 export * from './elw.service';
+export * from './websocket.service';
